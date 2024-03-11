@@ -1,0 +1,66 @@
+{
+    "maintenance-price-table": {
+        "selectOneItem": "Não há uma tabela origem selecionada, por favor selecione uma.",
+        "selectOnlyOneItem": "Há mais de uma tabela origem selecionada, por favor selecione apenas uma.",
+        "filterDivider": "Filtros",
+        "fields": {
+            "destinyTableCode": "Tabela Destino",
+            "valueType": "Modo",
+            "overwriteDestinyTable": "Sobrescrever",
+            "conversionFactor": "Fator de conversão",
+            "filterType": "Tipo de Filtro",
+            "filterSpecialty": "Especialidade",
+            "filterGroup": "Grupo",
+            "filterStartRange": "Faixa Inicial",
+            "filterEndRange": "Faixa Final"
+        },
+        "fieldOptions": {
+            "filterType": {
+                "total": "Total",
+                "specialty": "Especialidade",
+                "group": "Grupo",
+                "range": "Faixa"
+            },
+            "valueType": {
+                "preserve": "Preservar",
+                "create": "Criar"
+            }
+        },
+        "procServ": {
+            "title": "Manutenção Tabela Preço Procedimentos e Serviços",
+            "copy": {
+                "label": "Copiar",
+                "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Procedimentos e Serviços",
+                "text": "Este assitente tem como objetivo efetuar a cópia de Tabelas de Preço de Procedimentos e Serviços para outra tabela. Para continuar, clique em 'Avançar'",
+                "pTitle": "Cópia de Tabelas de Preço de Procedimentos e Serviços."
+            },
+            "delete": {
+                "label": "Deletar",
+                "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Procedimentos e Serviços",
+                "text": "Este assitente tem como objetivo efetuar a exclusão de Tabelas de Preço de Procedimentos e Serviços. Para continuar, clique em 'Avançar'",
+                "pTitle": "Exclusão de Tabelas de Preço de Procedimentos e Serviços."
+            },
+            "readjust": {
+                "label": "Reajustar",
+                "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Procedimentos e Serviços",
+                "text": "Este assitente tem como objetivo efetuar o reajuste de Tabelas de Preço de Procedimentos e Serviços. Para continuar, clique em 'Avançar'",
+                "pTitle": "Reajuste de Tabelas de Preço de Procedimentos e Serviços."
+            }
+        },
+        "matMed": {
+            "title": "Manutenção Tabela Preço Materiais e Medicamentos",
+            "copy": {
+                "label": "Copiar",
+                "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Materiais e Medicamentos",
+                "text": "Este assitente tem como objetivo efetuar a cópia de Tabelas de Preço de Materiais e Medicamentos para outra tabela. Para continuar, clique em 'Avançar'",
+                "pTitle": "Cópia de Tabelas de Preço de Materiais e Medicamentos."
+            },
+            "delete": {
+                "label": "Deletar",
+                "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Materiais e Medicamentos",
+                "text": "Este assitente tem como objetivo efetuar a exclusão de Tabelas de Preço de Materiais e Medicamentos. Para continuar, clique em 'Avançar'",
+                "pTitle": "Exclusão de Tabelas de Preço de Materiais e Medicamentos."
+            }
+        }
+    }
+}
