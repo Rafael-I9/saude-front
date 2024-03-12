@@ -15,7 +15,7 @@ export class LibService {
     return value + (value.endsWith('/') ? '' : '/');
   }
 
-  public concatRoute(args: string[]): string {
+  public concatRoute(...args: string[]): string {
     let result = '';
 
     args.forEach((item) => {

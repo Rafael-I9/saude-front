@@ -40,11 +40,11 @@ export class ConfigService implements AppConfig {
   }
 
   private privateGetApiUrl(baseUrl: string, module: string) {
-    return this.libService.concatRoute([baseUrl, 'api', module]);
+    return this.libService.concatRoute(baseUrl, 'api', module);
   }
 
   private privateGetFullApiUrl(baseUrl: string, module: string, version: string) {
-    return this.libService.concatRoute([this.privateGetApiUrl(baseUrl, module), version]);
+    return this.libService.concatRoute(this.privateGetApiUrl(baseUrl, module), version);
   }
 
   private getConfigDefault():AppConfig {
@@ -65,7 +65,7 @@ export class ConfigService implements AppConfig {
     }
   }
 
-  private setConfigDefault() {
+  private setConfigDefault(): void {
     const config = this.getConfigDefault();
 
     this.companyId = config.companyId;
@@ -77,8 +77,6 @@ export class ConfigService implements AppConfig {
     this.apiUrl = config.apiUrl;
     this.fullApiUrl = config.fullApiUrl;
     this.useFirstExecution = config.useFirstExecution;
-
-    console.log('config-default', this);
   }
 
   private setConfigByContext(): boolean {  
@@ -94,7 +92,6 @@ export class ConfigService implements AppConfig {
     this.baseUrl = erpContext.apiConfig.api_baseUrl;
 
     this.completeWithDefaultValues();
-    console.log('config-context', this);
     return true;
   }
 
@@ -111,7 +108,6 @@ export class ConfigService implements AppConfig {
     this.useFirstExecution = json.useFirstExecution;
     
     this.completeWithDefaultValues();
-    console.log('config-file', this);
     return true;
   }
 
