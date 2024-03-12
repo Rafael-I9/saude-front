@@ -1,0 +1,34 @@
+<po-page-default>
+  <div class="padding-content">
+
+    <div class="po-row layout-container" *ngIf="breadcrumbItems">
+      <div class="header-content">
+        <div class="po-breadcrumb-history">
+          <po-breadcrumb [p-items]="breadcrumbItems"></po-breadcrumb>
+        </div>
+      </div>
+    </div>
+
+    <t-page-resource
+      #pageResource
+      [t-base-url]="baseUrl"
+      [t-service-api]="serviceApi"
+      [t-schema-api]="schemaApi"
+      [t-striped]="true"
+      [t-actions-inline-table]="false"
+      t-route-resource="procserv-historic"
+      [t-sort]="true"
+    >
+    </t-page-resource>
+  </div>
+
+  <po-modal-footer class="div-footer-history po-row-footer" *ngIf="backApi">
+    <po-button 
+      class="button-history-back"
+      p-label="Voltar"
+      (p-click)="onBack()"
+    ></po-button>
+  </po-modal-footer>
+
+</po-page-default>
+

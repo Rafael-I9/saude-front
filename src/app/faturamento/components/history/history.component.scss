@@ -1,0 +1,82 @@
+:host ::ng-deep {
+
+    .po-page-content {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  
+    .padding-content {
+      padding: 24px 24px;
+    }
+  
+    .header-content .po-container{
+      width: 800px;
+    }
+  
+    .po-info-value {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  
+    .t-page-header,
+    .po-page-header-custom {
+      padding-left: 0 !important;
+    }
+  
+    .content-container {
+      padding: 0px !important;
+      margin: 24px 16px 0px 0px !important;
+      padding-bottom: 24px;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+  
+    .po-breadcrumb-history {
+      width: 450px !important;
+      margin-right: 24px !important;
+    }
+    .po-breadcrumb {
+      width: 550px !important;
+    }
+  
+    .po-info-container-content {
+      padding-bottom: 0px;
+    }
+  
+    .container-detail .po-container  {
+      display: flex;
+      border-radius: 10px;
+      max-height: 100px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 8px 0px 0px 16px;
+      gap: 22px
+    }
+  
+    .po-page .po-page {
+      margin-left: 0 !important;
+      width: 100%;
+    }
+  
+    .div-footer-history {
+      display: flex !important;
+      width: 100vw !important;
+      height: 78px !important;
+      flex-shrink: 0 !important;
+      bottom: 0 !important;
+      align-content: space-around !important;
+      position: fixed !important;
+      overflow: auto !important;
+      border-top: 2px solid var(--color-neutral-light-90) !important;
+      background-color: var(--color-neutral-light-00) !important;
+    }
+  
+    .button-history-back {
+      float: left !important;
+      text-align: right !important;
+      position: fixed !important;
+      right: 24px !important;
+    }
+  }
+  

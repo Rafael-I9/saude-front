@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { PoDynamicFormField, PoTableAction } from '@po-ui/ng-components';
 import { TProcessOption, TPageResourceComponent } from '@smart-ui/ng-components';
 import { MaintenancePriceTableFilter } from '../services/maintenance-price-table.filter';
@@ -18,7 +17,6 @@ export class MaintenancePriceTableProcServComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private location: Location,
     private libService: LibService,
     private maintenancePriceTableFilter: MaintenancePriceTableFilter,
     private maintenancePriceTableFields: MaintenancePriceTableFields,
@@ -35,7 +33,7 @@ export class MaintenancePriceTableProcServComponent implements OnInit {
       {
         icon: 'po-icon po-icon-history',
         label: '',
-        action: (item:any) => this.router.navigate([`${this.location.path()}/detail/${item.id}`])
+        action: (item:any) => this.router.navigate(['/procserv-historic'], { queryParams: { companyId: item.companyId, tableCode: item.tableCode } })
       }
     ]
   }

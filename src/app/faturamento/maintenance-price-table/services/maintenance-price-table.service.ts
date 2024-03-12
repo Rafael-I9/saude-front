@@ -57,7 +57,7 @@ export class MaintenancePriceTableService {
   }
 
   getBaseUrl(): string {
-    return this.configService.fullApiUrl;    
+    return this.configService.fullApiUrl;
   }
 
   getServiceApiUrl(service: string): string {
