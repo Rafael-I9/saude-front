@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { PoComboOption, PoNotificationService } from '@po-ui/ng-components';
 import { exportCihaPt } from '../I18n/export-ciha-pt';
 import { ExportCIHAParametros } from '../model/export-ciha-parametros.model';
+import { ConfigService } from 'src/app/core/config/config.service';
 
 @Component({
   selector: 'sau-export-ciha-filtros',
@@ -15,8 +16,14 @@ export class ExportCihaFiltrosComponent {
   literals = exportCihaPt;
   @Output() mudouStatusEvento = new EventEmitter<string>();
 
-  constructor(private poNotification: PoNotificationService) {
+  public codColigada: number;
+
+  constructor(
+    private poNotification: PoNotificationService,
+    private config: ConfigService
+  ) {
     this.parametros = new ExportCIHAParametros();
+    this.codColigada = this.config.companyId;
   }
 
   maskCompetencia: string = '99/9999';
@@ -25,8 +32,6 @@ export class ExportCihaFiltrosComponent {
     { label: 'Finalizado', value: 'F' },
     { label: 'Não Liberado', value: 'N' },
   ];
-
-  codColigada: number = 1;
 
   consultarClick(): void {
     if (this.validarCompetencia(this.parametros.competencia))

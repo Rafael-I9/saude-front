@@ -10,7 +10,6 @@ import {
   PoNotificationService,
   PoPageAction,
   PoPageFilter,
-  PoPageListComponent,
   PoPageSlideComponent,
   PoTableAction,
   PoTableColumn,
@@ -99,7 +98,7 @@ export class ExportCihaComponent extends ComponentBase implements OnInit {
   }
 
   executarFiltro(parametros: ExportCIHAParametros) {
-    if (!!parametros) parametros.codColigada = 1;
+    if (!!parametros) parametros.codColigada = this.config.companyId;
 
     if (!this.validaParametros(parametros)) {
       this.poNotification.warning(
