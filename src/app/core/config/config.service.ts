@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from './config.model';
 import { TErpContextAcessorService } from '@totvs/common-api';
-import { LibService } from '../lib/lib.service';
+import { LibUtils } from 'src/app/shared/utils/lib.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class ConfigService implements AppConfig {
   public defaultApiModule = 'hcg';
   public defaultApiVersion = 'v1';
 
-  constructor(private context: TErpContextAcessorService, private libService: LibService) {
+  constructor(private context: TErpContextAcessorService, private libUtils: LibUtils) {
     if (this.setConfigByContext())
       return;
 
@@ -40,11 +40,11 @@ export class ConfigService implements AppConfig {
   }
 
   private privateGetApiUrl(baseUrl: string, module: string) {
-    return this.libService.concatRoute(baseUrl, 'api', module);
+    return this.libUtils.concatRoute(baseUrl, 'api', module);
   }
 
   private privateGetFullApiUrl(baseUrl: string, module: string, version: string) {
-    return this.libService.concatRoute(this.privateGetApiUrl(baseUrl, module), version);
+    return this.libUtils.concatRoute(this.privateGetApiUrl(baseUrl, module), version);
   }
 
   private getConfigDefault():AppConfig {
@@ -96,7 +96,7 @@ export class ConfigService implements AppConfig {
   }
 
   private setConfigByFile(): boolean {
-    const json = this.libService.loadJsonFile('assets/config.json');
+    const json = this.libUtils.loadJsonFile('assets/config.json');
 
     if (!json)
       return false;

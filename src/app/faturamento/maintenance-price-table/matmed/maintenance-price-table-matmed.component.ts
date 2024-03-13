@@ -4,7 +4,7 @@ import { TProcessOption, TPageResourceComponent } from '@smart-ui/ng-components'
 import { MaintenancePriceTableFilter, FilterType } from '../services/maintenance-price-table.filter';
 import { MaintenancePriceTableFields } from '../services/maintenance-price-table.fields';
 import { MaintenancePriceTableService, TableType, ProcessType } from '../services/maintenance-price-table.service';
-import { LibService } from '../../../core/lib/lib.service';
+import { LibUtils } from 'src/app/shared/utils/lib.utils';
 
 @Component({
   selector: 'app-maintenance-price-table-matmed',
@@ -15,7 +15,7 @@ export class MaintenancePriceTableMatMedComponent implements OnInit {
   @ViewChild(TPageResourceComponent, { static: true }) pageResource!: TPageResourceComponent;
 
   constructor(
-    private libService: LibService,
+    private libUtils: LibUtils,
     private maintenancePriceTableFilter: MaintenancePriceTableFilter,
     private maintenancePriceTableFields: MaintenancePriceTableFields,
     private maintenancePriceTableService: MaintenancePriceTableService
@@ -44,7 +44,7 @@ export class MaintenancePriceTableMatMedComponent implements OnInit {
     ...this.fieldsFilter
   ];
 
-  private resources = this.libService.getResource('maintenance-price-table');
+  private resources = this.libUtils.getResource('maintenance-price-table');
 
   processRes = this.resources['procServ'];
   processResCopy = this.processRes['copy'];

@@ -1,0 +1,38 @@
+<div class="po-row">
+  <div class="po-sm-12 po-md-6 po-lg-4">
+    <sau-unidade-faturamento-combo
+      (mudouUnidadeEvento)="unidadeChanged($event)"
+    >
+    </sau-unidade-faturamento-combo>
+  </div>
+  <div class="po-sm-12 po-md-6 po-lg-3">
+    <po-combo
+      name="status"
+      [p-label]="literals.label.status"
+      [ngModel]="parametros.statusCIHA"
+      (ngModelChange)="parametros.statusCIHA = $event"
+      [p-options]="optionsStatus"
+      [p-required]="true"
+      (p-change)="mudouStatusCiha($event)"
+    ></po-combo>
+  </div>
+  <div class="po-sm-12 po-md-6 po-lg-3">
+    <po-input
+      name="competencia"
+      [ngModel]="parametros.competencia"
+      (ngModelChange)="parametros.competencia = $event"
+      [p-mask]="maskCompetencia"
+      [p-label]="literals.label.competencia"
+      p-required="true"
+      (p-change)="mudouCompetencia()"
+    ></po-input>
+  </div>
+  <div class="po-sm-12 po-md-6 po-lg-2 po-mt-4">
+    <po-button
+      [p-label]="literals.botoes.consultar"
+      p-kind="primary"
+      (p-click)="consultarClick()"
+    >
+    </po-button>
+  </div>
+</div>

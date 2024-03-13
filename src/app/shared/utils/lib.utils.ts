@@ -4,7 +4,7 @@ import { PoI18nService } from "@po-ui/ng-components";
 @Injectable({
   providedIn: 'root',
 })
-export class LibService {
+export class LibUtils {
   constructor(private poI18nService: PoI18nService) { }
 
   public defaultApiMimeType: string = 'application/json';
@@ -21,7 +21,7 @@ export class LibService {
     args.forEach((item) => {
       result += this.addSeparator(item);
     });
-
+    
     return result;
   }
 
@@ -83,7 +83,7 @@ export class LibService {
     args.forEach((item) => {
       value = value[item];
     });
-
+    
     return value;
   }
 }

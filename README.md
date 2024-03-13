@@ -1,43 +1,27 @@
-# saude-front
+# SaudeFront
 
-Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.2.10.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
 
-## Servidor de desenvolvimento
+## Development server
 
-Execute `ng serve` ou `ng s` para um servidor de desenvolvimento (ou `ng s --port 9999` para definir uma porta). Navegue até `http://localhost:4200/`. O aplicativo será recarregado automaticamente se você alterar algum dos arquivos de origem.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
-Execute `ng generate component nome-do-componente` para gerar um novo componente. Você também pode usar `ng generate directiva|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
-Execute `ng build` para construir o projeto. Os artefatos de construção serão armazenados no diretório `dist/`.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Build para RM
+## Running unit tests
 
-Execute `ng build --base-href=./ --configuration production` para construir o projeto para o aplicativo RM.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Executando testes unitários
+## Running end-to-end tests
 
-Execute `ng test` para executar os testes de unidade via [Karma](https://karma-runner.github.io).
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Executando testes ponta a ponta
+## Further help
 
-Execute `ng e2e` para executar os testes ponta a ponta através de uma plataforma de sua escolha. Para usar este comando, você precisa primeiro adicionar um pacote que implemente recursos de teste ponta a ponta.
-
-## Mais ajuda
-
-Para obter mais ajuda sobre o Angular CLI, use `ng help` ou confira a página [Visão geral do Angular CLI e referência de comandos](https://angular.io/cli).
-
-## Extras
-
-### Para colocar seu projeto Angular no sistema RM será necessário:
-
-1. Compilar o projeto com o comando `ng build --base-href=./ --configuration production`
-2. Na pasta `Dist` será gerada uma pasta `saude-frot` com o projeto compilado, esta pasta deve ser copiada para `Pasta-da-sua-aplicação\Bin\wwwroot`
-3. Para verificar se está funcionando corretamente, basta ajustar a url da sua aplicação, alterando a porta e adicionando o nome do projeto, exemplo:
-\
-Utilizando `demo` como o nome do módulo, acessamos este pela url `http://localhost:4200/demo`.
-\
-Sendo assim, basta alterar a porta para a utilizada pelo servidor (Configuração `HTTPPORT` informada no arquivo `RM.Host.exe.config`, geralmente a porta é `8052`), e adicionar o projeto antes do módulo, ficando `http://localhost:8052/saude-front/demo`.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

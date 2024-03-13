@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "sau",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -21,6 +21,16 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "/assets/monaco/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "/assets/monaco/"
+              },
               {
                 "glob": "**/*",
                 "input": "node_modules/monaco-editor/min",
@@ -42,13 +52,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
@@ -96,6 +106,16 @@
                 "input": "node_modules/monaco-editor/min",
                 "output": "/assets/monaco/"
               },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "/assets/monaco/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "/assets/monaco/"
+              },
               "src/favicon.ico",
               "src/assets"
             ],
@@ -112,6 +132,6 @@
     }
   },
   "cli": {
-    "analytics": "3e7d820d-8184-4579-b36e-d8f094668d90"
+    "analytics": "a27e45c6-6d4e-4582-949f-f866fd0d7a53"
   }
 }

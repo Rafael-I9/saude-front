@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PoNotificationService, } from '@po-ui/ng-components';
 import { ConfigService } from '../../../core/config/config.service';
-import { LibService } from '../../../core/lib/lib.service';
+import { LibUtils } from 'src/app/shared/utils/lib.utils';
 
 export enum TableType {
   ProcServ = 'procserv',
@@ -21,11 +21,11 @@ export class MaintenancePriceTableService {
   private resources: any;
 
   constructor(
-    private libService: LibService,
+    private libUtils: LibUtils,
     private poNotification: PoNotificationService,
     private configService: ConfigService
   ) {
-    this.resources = this.libService.getResource('maintenance-price-table');
+    this.resources = this.libUtils.getResource('maintenance-price-table');
   }
 
   getOriginTableCode(selectedRows: any): string | number {

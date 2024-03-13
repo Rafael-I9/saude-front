@@ -1,4 +1,7 @@
 {
+    "ciha": {
+        "title": "Exportação CIHA"
+    },
     "maintenance-price-table": {
         "selectOneItem": "Não há uma tabela origem selecionada, por favor selecione uma.",
         "selectOnlyOneItem": "Há mais de uma tabela origem selecionada, por favor selecione apenas uma.",
@@ -45,7 +48,8 @@
                 "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Procedimentos e Serviços",
                 "text": "Este assitente tem como objetivo efetuar o reajuste de Tabelas de Preço de Procedimentos e Serviços. Para continuar, clique em 'Avançar'",
                 "pTitle": "Reajuste de Tabelas de Preço de Procedimentos e Serviços."
-            }
+            },
+            "historic": "Histórico"
         },
         "matMed": {
             "title": "Manutenção Tabela Preço Materiais e Medicamentos",

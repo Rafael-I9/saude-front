@@ -1,6 +1,6 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { PoDynamicFormField, PoSelectOption, ForceOptionComponentEnum } from '@po-ui/ng-components';
-import { LibService } from '../../../core/lib/lib.service';
+import { LibUtils } from '../../../shared/utils/lib.utils';
 
 export enum FilterType {
   Total     = 'T',
@@ -16,8 +16,8 @@ export class MaintenancePriceTableFilter {
   public renderer: Renderer2;
   private resources: any;
 
-  constructor(private libService: LibService, private rendererFactory: RendererFactory2) {
-    this.resources = this.libService.getResource('maintenance-price-table');
+  constructor(private libUtils: LibUtils, private rendererFactory: RendererFactory2) {
+    this.resources = this.libUtils.getResource('maintenance-price-table');
     this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 

@@ -1,7 +1,5 @@
 {
-    "companyId": 1,
-    "baseUrl": "http://localhost:8051",
-    "apiUrl": "http://localhost:8051/api/hcg",
-    "fullApiUrl": "http://localhost:8051/api/hcg/v1",
-    "useFirstExecution": false
+  "hostName": "localhost",
+  "apiUrl": "http://localhost:8051/api/hcg",
+  "apiVersion": "v1"
 }

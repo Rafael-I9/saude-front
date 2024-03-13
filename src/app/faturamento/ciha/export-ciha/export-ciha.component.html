@@ -1,0 +1,112 @@
+<po-page-list
+  #poPageList
+  [p-title]="literals.title"
+  [p-actions]="actionsPage"
+  [p-filter]="pageFilter"
+>
+  <sau-export-ciha-filtros
+    (consultarEvento)="clickConsultar($event)"
+    (mudouStatusEvento)="obterProcessOptions($event)"
+    (modeloValidoEvento)="preencherParametros($event)"
+  ></sau-export-ciha-filtros>
+
+  <po-table
+    [p-auto-collapse]="true"
+    [p-selectable]="true"
+    [p-single-select]="false"
+    [p-sort]="true"
+    [p-hide-table-search]="false"
+    [p-striped]="true"
+    [p-items]="items"
+    [p-columns]="columns"
+    [p-loading]="isLoading"
+    [p-show-more-disabled]="showMoreDisabled"
+    [p-loading-show-more]="isLoading"
+    (p-show-more)="showMore()"
+  >
+    <ng-template
+      p-table-row-template
+      let-rowItem
+      let-i="rowIndex"
+      [p-table-row-template-show]="possuiPendencias"
+    >
+      <po-widget p-title="">
+        <div class="po-row">
+          <po-info
+            class="po-md-4"
+            [p-label]="literals.label.pendencias"
+            [p-value]="rowItem.notificationRegister.notification"
+          >
+          </po-info>
+        </div>
+      </po-widget>
+    </ng-template>
+  </po-table>
+
+  <po-page-slide
+    p-click-out="true"
+    p-flexible-width="true"
+    p-hide-close="false"
+    p-size="large"
+    [p-title]="literals.label.incluirAtendimentoForaCompetencia"
+  >
+    <div class="po-row">
+      <po-number
+        class="po-md-4"
+        name="codigoPaciente"
+        [ngModel]="paramsAnotherPeriod.patientId"
+        (ngModelChange)="paramsAnotherPeriod.patientId = $event"
+        [p-label]="literals.label.codigoPaciente"
+      ></po-number>
+      <po-input
+        class="po-md-4"
+        name="nomePaciente"
+        [ngModel]="paramsAnotherPeriod.patientName"
+        (ngModelChange)="paramsAnotherPeriod.patientName = $event"
+        [p-label]="literals.label.paciente"
+      ></po-input>
+      <po-input
+        class="po-md-4"
+        name="cpfPaciente"
+        [p-label]="literals.label.cpf"
+        [ngModel]="paramsAnotherPeriod.patientDoc"
+        (ngModelChange)="paramsAnotherPeriod.patientDoc = $event"
+        p-mask="999.999.999-99"
+        [p-label]=""
+      ></po-input>
+
+      <po-datepicker
+        class="po-md-6"
+        [p-label]="literals.label.dataInicio"
+        [ngModel]="paramsAnotherPeriod.initialDate"
+        (ngModelChange)="paramsAnotherPeriod.initialDate = $event"
+      ></po-datepicker>
+      <po-datepicker
+        class="po-md-6"
+        [p-label]="literals.label.dataFinal"
+        [ngModel]="paramsAnotherPeriod.finalDate"
+        (ngModelChange)="paramsAnotherPeriod.finalDate = $event"
+      ></po-datepicker>
+    </div>
+
+    <po-button
+      class="po-md-12 po-mb-2"
+      [p-label]="literals.botoes.consultar"
+      (p-click)="executarFiltroOutraCompetencia()"
+    ></po-button>
+
+    <po-table
+      [p-striped]="true"
+      p-container="border"
+      [p-loading]="isLoadingAnotherPeriod"
+      [p-show-more-disabled]="showMoreDisabledAnotherPeriod"
+      [p-loading-show-more]="isLoadingAnotherPeriod"
+      [p-items]="itemsAnotherPeriod"
+      [p-columns]="columnsAnotherPeriod"
+      [p-hide-columns-manager]="true"
+      [p-hide-batch-actions]="false"
+      [p-actions]="actionsTableAnotherPeriod"
+    >
+    </po-table>
+  </po-page-slide>
+</po-page-list>

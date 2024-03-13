@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PoMenuItem } from '@po-ui/ng-components';
 import { TErpConfigAcessorService } from '@totvs/common-api'
-import { LibService } from './core/lib/lib.service';
+import { LibUtils } from './shared/utils/lib.utils';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor(private libService: LibService, public config: TErpConfigAcessorService) { }
+export class AppComponent {
+  constructor(
+    private libUtils: LibUtils,
+    public config: TErpConfigAcessorService
+  ) { }
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Home', link: '/' },
-    { label: this.libService.getResourceValue('maintenance-price-table', 'procServ', 'title'), link: 'maintenance-price-table-procserv' },
-    { label: this.libService.getResourceValue('maintenance-price-table', 'matMed', 'title'), link: 'maintenance-price-table-matmed' },
-    { label: 'Histórico', link: 'procserv-historic' }
+    { label: this.libUtils.getResourceValue('ciha', 'title'), link: 'export-ciha' },
+    { label: this.libUtils.getResourceValue('maintenance-price-table', 'procServ', 'title'), link: 'maintenance-price-table-procserv' },
+    { label: this.libUtils.getResourceValue('maintenance-price-table', 'matMed', 'title'), link: 'maintenance-price-table-matmed' },
+    { label: this.libUtils.getResourceValue('maintenance-price-table', 'procServ', 'historic'), link: 'procserv-historic' },
   ];
 
   showMenu!: boolean;

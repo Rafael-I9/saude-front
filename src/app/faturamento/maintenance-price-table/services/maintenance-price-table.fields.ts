@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PoDynamicFormField } from '@po-ui/ng-components';
-import { LibService } from '../../../core/lib/lib.service';
+import { LibUtils } from 'src/app/shared/utils/lib.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,8 @@ import { LibService } from '../../../core/lib/lib.service';
 export class MaintenancePriceTableFields {
   private resources: any;
 
-  constructor (private libService: LibService) {
-    this.resources = this.libService.getResource('maintenance-price-table');
+  constructor (private libUtils: LibUtils) {
+    this.resources = this.libUtils.getResource('maintenance-price-table');
   }  
 
   getDestinyTableCode(optionsService:string, fieldLabel:string, fieldValue:string):PoDynamicFormField {
