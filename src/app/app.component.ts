@@ -9,22 +9,22 @@ import { LibUtils } from './shared/utils/lib.utils';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  public showMenu: boolean;
+
   constructor(
     private libUtils: LibUtils,
     public config: TErpConfigAcessorService
-  ) { }
+  ) {
+    this.showMenu = this.config.showMenu;
+  }
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Home', link: '/' },
     { label: this.libUtils.getResourceValue('ciha', 'title'), link: 'export-ciha' },
-    { label: this.libUtils.getResourceValue('maintenance-price-table', 'procServ', 'title'), link: 'maintenance-price-table-procserv' },
-    { label: this.libUtils.getResourceValue('maintenance-price-table', 'matMed', 'title'), link: 'maintenance-price-table-matmed' },
-    { label: this.libUtils.getResourceValue('maintenance-price-table', 'procServ', 'historic'), link: 'procserv-historic' },
+    { label: this.libUtils.getResourceValue('maintenance-price-table', 'title'), subItems: [
+      { label: this.libUtils.getResourceValue('maintenance-price-table', 'procServ', 'title'), link: 'maintenance-price-table-procserv' },
+      { label: this.libUtils.getResourceValue('maintenance-price-table', 'matMed', 'title'), link: 'maintenance-price-table-matmed' },
+      { label: this.libUtils.getResourceValue('maintenance-price-table', 'procServ', 'historic', 'title'), link: 'procserv-historic' }
+    ]}
   ];
-
-  showMenu!: boolean;
-
-  async ngOnInit(): Promise<void> {
-    this.showMenu = this.config.showMenu;
-  }
 }

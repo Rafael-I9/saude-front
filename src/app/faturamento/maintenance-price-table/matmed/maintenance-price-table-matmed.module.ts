@@ -5,7 +5,7 @@ import { SmartUIComponentsModule } from '@smart-ui/ng-components';
 import { MaintenancePriceTableMatMedComponent } from './maintenance-price-table-matmed.component';
 import { MaintenancePriceTableMatMedRoutingModule } from './maintenance-price-table-matmed-routing.module';
 import { TCommonApiModule } from '@totvs/common-api';
-import { RequestInterceptorHttp } from '../../../core/interceptors/interceptor';
+import { RequestInterceptorHttp } from '../../../shared/interceptor/interceptor';
 
 @NgModule({
   declarations: [

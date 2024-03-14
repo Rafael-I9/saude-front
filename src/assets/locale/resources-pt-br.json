@@ -3,6 +3,7 @@
         "title": "Exportação CIHA"
     },
     "maintenance-price-table": {
+        "title": "Manutenção Tabela Preço",
         "selectOneItem": "Não há uma tabela origem selecionada, por favor selecione uma.",
         "selectOnlyOneItem": "Há mais de uma tabela origem selecionada, por favor selecione apenas uma.",
         "filterDivider": "Filtros",
@@ -30,7 +31,7 @@
             }
         },
         "procServ": {
-            "title": "Manutenção Tabela Preço Procedimentos e Serviços",
+            "title": "Procedimentos e Serviços",
             "copy": {
                 "label": "Copiar",
                 "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Procedimentos e Serviços",
@@ -49,10 +50,12 @@
                 "text": "Este assitente tem como objetivo efetuar o reajuste de Tabelas de Preço de Procedimentos e Serviços. Para continuar, clique em 'Avançar'",
                 "pTitle": "Reajuste de Tabelas de Preço de Procedimentos e Serviços."
             },
-            "historic": "Histórico"
+            "historic": {
+                "title": "Histórico de Procedimentos e Serviços"
+            }
         },
         "matMed": {
-            "title": "Manutenção Tabela Preço Materiais e Medicamentos",
+            "title": "Materiais e Medicamentos",
             "copy": {
                 "label": "Copiar",
                 "title": "Bem vindo ao Assistente de Manutenção de Tabelas de Preço de Materiais e Medicamentos",

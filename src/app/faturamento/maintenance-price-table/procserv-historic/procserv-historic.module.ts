@@ -5,7 +5,7 @@ import { SmartUIComponentsModule } from '@smart-ui/ng-components';
 import { ProcServHistoricComponent } from './procserv-historic.component';
 import { ProcServHistoricRoutingModule } from './procserv-historic-routing.module';
 import { TCommonApiModule } from '@totvs/common-api';
-import { RequestInterceptorHttp } from '../../../core/interceptors/interceptor';
+import { RequestInterceptorHttp } from '../../../shared/interceptor/interceptor';
 import { HistoryComponent } from '../../components/history/history.component';
 
 @NgModule({

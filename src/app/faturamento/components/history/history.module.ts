@@ -4,7 +4,7 @@ import { PoModule } from '@po-ui/ng-components';
 import { SmartUIComponentsModule } from '@smart-ui/ng-components';
 import { HistoryRoutingModule } from './history-routing.module';
 import { TCommonApiModule } from '@totvs/common-api';
-import { RequestInterceptorHttp } from '../../../core/interceptors/interceptor';
+import { RequestInterceptorHttp } from '../../../shared/interceptor/interceptor';
 //import { HistoryComponent } from './history.component';
 
 @NgModule({
