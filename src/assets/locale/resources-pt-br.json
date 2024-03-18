@@ -19,6 +19,10 @@
             "filterEndRange": "Faixa Final"
         },
         "fieldOptions": {
+            "boolean": {
+                "true": "Sim",
+                "false": "Não"
+            },
             "filterType": {
                 "total": "Total",
                 "specialty": "Especialidade",
@@ -51,7 +55,8 @@
                 "pTitle": "Reajuste de Tabelas de Preço de Procedimentos e Serviços."
             },
             "historic": {
-                "title": "Histórico de Procedimentos e Serviços"
+                "title": "Histórico de Procedimentos e Serviços",
+                "simpleTitle": "Histórico"
             }
         },
         "matMed": {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PoDynamicFormField  } from '@po-ui/ng-components';
-import { TProcessOption, TPageResourceComponent } from '@smart-ui/ng-components';
+import { TProcessOption, TPageResourceComponent, TGridResourceColumn } from '@smart-ui/ng-components';
 import { MaintenancePriceTableFilter, FilterType } from '../services/maintenance-price-table.filter';
 import { MaintenancePriceTableFields } from '../services/maintenance-price-table.fields';
 import { MaintenancePriceTableService, TableType, ProcessType } from '../services/maintenance-price-table.service';
@@ -27,14 +27,14 @@ export class MaintenancePriceTableMatMedComponent implements OnInit {
   }
 
   readonly baseUrl = this.maintenancePriceTableService.getBaseUrl();
-  readonly serviceApi = this.maintenancePriceTableService.getServiceApiUrl('matmed-table');
-  readonly schemaApi = this.maintenancePriceTableService.getSchemaApiUrl('matmed-table');
+  readonly serviceApi = 'matmed-tables';
+  readonly schemaApi = 'matmed-tables/schema';
   readonly routeResource = "maintenance-price-table-matmed";
 
   readonly fieldsFilter = this.maintenancePriceTableFilter.getFilterFields([FilterType.Total, FilterType.Range]);
   
   readonly procParametersCopy: Array<PoDynamicFormField> = [
-    this.maintenancePriceTableFields.getDestinyTableCode(this.serviceApi, 'tabMatmedDescription', 'tabMatmedCode'),
+    this.maintenancePriceTableFields.getDestinyTableCode(this.baseUrl + this.serviceApi, 'tabMatmedDescription', 'tabMatmedCode'),
     this.maintenancePriceTableFields.getValueType(),
     this.maintenancePriceTableFields.getOverwriteDestinyTable(),
     ...this.fieldsFilter
@@ -83,4 +83,18 @@ export class MaintenancePriceTableMatMedComponent implements OnInit {
     }
   ]
 
+  readonly columns: TGridResourceColumn[] = [
+    {
+      property: 'atuAutoBrasindice',
+      visible: false
+    },
+    {
+      property: 'atuAuto',
+      visible: false
+    },
+    {
+      property: 'atuAutoSimpro',
+      visible: false
+    }
+  ];
 }

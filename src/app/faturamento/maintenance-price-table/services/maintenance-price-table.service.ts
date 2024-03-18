@@ -28,7 +28,7 @@ export class MaintenancePriceTableService {
     this.resources = this.libUtils.getResource('maintenance-price-table');
   }
 
-  getOriginTableCode(selectedRows: any): string | number {
+  private getOriginTableCode(selectedRows: any): string | number {
     const errorMessage = selectedRows == null || selectedRows.length < 1
       ? this.resources['selectOneItem']
       : selectedRows.length > 1
@@ -44,27 +44,56 @@ export class MaintenancePriceTableService {
     return selectedRows[0].tableCode;
   }
 
-  getApiParams(model: any, selectedRows: any) {
-    return {
-      "CompanyId": this.configService.companyId,
-      "OriginTableCode": this.getOriginTableCode(selectedRows),
-      ...model.executionParameter
-    };
+  private extractTableCode(value: string): string {
+    if (value.includes('|'))
+      return value.split('|')[1];
+
+    return value
   }
 
-  getProcessEndpoint(tableType: TableType, processType: ProcessType): string {
+  public getApiParams(model: any, selectedRows: any) {
+    let obj = {
+      "CompanyId": this.configService.companyId,
+      "OriginTableCode": this.getOriginTableCode(selectedRows),
+      ...model.executionParameter,
+      "Filter": this.getFilter(model),
+    };
+
+    obj.OriginTableCode = this.extractTableCode(obj.OriginTableCode);
+
+    if (obj.DestinyTableCode)
+      obj.DestinyTableCode = this.extractTableCode(obj.DestinyTableCode);
+
+    return obj;
+  }
+
+  public getFilter(model: any) {
+    const param = model.executionParameter;
+
+    let obj: any = {};
+    obj.FilterType = param.FilterFilterType;
+
+    if (param.FilterSpecialtyCode)  obj.SpecialtyCode  = param.FilterSpecialtyCode;
+    if (param.FilterItensGroupCode) obj.ItensGroupCode = param.FilterItensGroupCode;
+    if (param.FilterStartRangeCode) obj.StartRangeCode = param.FilterStartRangeCode;
+    if (param.FilterEndRangeCode)   obj.EndRangeCode   = param.FilterEndRangeCode;
+
+    return obj;
+  }
+
+  public getProcessEndpoint(tableType: TableType, processType: ProcessType): string {
     return `${this.getBaseUrl()}maintenance-price-tables/${tableType}/${processType}`;
   }
 
-  getBaseUrl(): string {
+  public  getBaseUrl(): string {
     return this.configService.fullApiUrl;
   }
 
-  getServiceApiUrl(service: string): string {
+  public getServiceApiUrl(service: string): string {
     return this.getBaseUrl() + service;
   }
 
-  getSchemaApiUrl(service: string): string {
+  public getSchemaApiUrl(service: string): string {
     return this.getServiceApiUrl(service) + '/schema';
   }
   

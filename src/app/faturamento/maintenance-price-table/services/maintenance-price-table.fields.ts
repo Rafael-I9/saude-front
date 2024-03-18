@@ -22,7 +22,7 @@ export class MaintenancePriceTableFields {
       gridSmColumns: 12,
       optionsService: optionsService,
       fieldLabel: fieldLabel,
-      fieldValue: fieldValue,
+      fieldValue: fieldValue,      
       optionsMulti: false
     }
   }
@@ -43,13 +43,17 @@ export class MaintenancePriceTableFields {
   }
 
   getOverwriteDestinyTable():PoDynamicFormField {
+    const res = this.resources['fieldOptions']['boolean'];
+
     return {
       order: 3,
       property: 'OverwriteDestinyTable',
       label: this.resources['fields']['overwriteDestinyTable'],
       type: 'boolean',
       gridColumns: 4,
-      gridSmColumns: 4
+      gridSmColumns: 4,
+      booleanTrue: res['true'],
+      booleanFalse: res['false']
     }
   }
 

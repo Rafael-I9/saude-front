@@ -31,8 +31,7 @@ export class MaintenancePriceTableProcServComponent implements OnInit {
   private getCustomTableActions(): PoTableAction[] {
     return [
       {
-        icon: 'po-icon po-icon-history',
-        label: '',
+        label: this.processRes['historic']['simpleTitle'],
         action: (item:any) => this.router.navigate(['/procserv-historic'], { queryParams: { companyId: item.companyId, tableCode: item.tableCode } })
       }
     ]
@@ -62,11 +61,10 @@ export class MaintenancePriceTableProcServComponent implements OnInit {
   ];
 
   private resources = this.libUtils.getResource('maintenance-price-table');
-
-  processRes = this.resources['procServ'];
-  processResCopy = this.processRes['copy'];
-  processResDelete = this.processRes['delete'];
-  processResReadjust = this.processRes['readjust'];
+  private processRes = this.resources['procServ'];
+  private processResCopy = this.processRes['copy'];
+  private processResDelete = this.processRes['delete'];
+  private processResReadjust = this.processRes['readjust'];
 
   processOptions: TProcessOption[] = [
     {

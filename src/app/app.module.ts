@@ -14,6 +14,7 @@ import { TotvsTokenInterceptorHttp } from './shared/interceptor/totvs-token.inte
 import { FilterInterceptorHttp } from './shared/interceptor/filter.interceptor';
 
 // Mesmo que não esteja sendo utilizado, se remover dará erro no po-page-list!
+import { FaturamentoModule } from './faturamento/faturamento.module';
 import { ExportCihaModule } from './faturamento/ciha/export-ciha/export-ciha.module';
 
 @NgModule({

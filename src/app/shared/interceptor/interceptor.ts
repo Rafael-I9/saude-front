@@ -1,7 +1,8 @@
 import { ComponentRef, Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpResponse } from '@angular/common/http';
 import { PoLoadingOverlayComponent, PoNotificationService, PoLanguageService, PoComponentInjectorService } from '@po-ui/ng-components';
 import { map, catchError, throwError } from 'rxjs';
+import { LibUtils } from '../utils/lib.utils';
 
 export const errorCatchingDynamicLiterals: { [key: string]: any } = {
   en: {
@@ -22,7 +23,8 @@ export class RequestInterceptor implements HttpInterceptor {
   constructor (
     private notification: PoNotificationService,
     private languageService: PoLanguageService,
-    private poComponentInjector: PoComponentInjectorService
+    private poComponentInjector: PoComponentInjectorService,
+    private libUtils: LibUtils
   ) {
     this.language = this.languageService.getShortLanguage();
   }
@@ -36,13 +38,27 @@ export class RequestInterceptor implements HttpInterceptor {
 
     return next.handle(request)
       .pipe(
-        map(res => {
-          return res
+        // map(event => {
+        //   return event;
+        // }),
+        map((event: HttpEvent<any>) => {
+          return this.setTitle(event, request);
         }),
         catchError((error: any) => {
           return this.throwErrorAndNotificateIt(error);
         })
       )
+  }
+
+  private setTitle(event: HttpEvent<any>, request: HttpRequest<any>) {
+    if (event instanceof HttpResponse) {
+      if (request.url.includes('procserv-tables/schema'))
+        event.body.title = this.libUtils.getResourceValue('maintenance-price-table', 'procServ', 'title');
+      else if (request.url.includes('matmed-tables/schema'))
+        event.body.title = this.libUtils.getResourceValue('maintenance-price-table', 'matMed', 'title');
+    }
+
+    return event;
   }
 
   private getDefaultErrorMessage(error: HttpErrorResponse) {

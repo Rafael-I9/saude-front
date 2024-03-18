@@ -39,10 +39,10 @@ export class MaintenancePriceTableFilter {
   }
 
   onChangeFilterType(changeValue: any) {
-    this.enableField('Filter.SpecialtyCode',  changeValue.value == FilterType.Specialty || changeValue.value == FilterType.Group);
-    this.enableField('Filter.ItensGroupCode', changeValue.value == FilterType.Group);
-    this.enableField('Filter.StartRangeCode', changeValue.value == FilterType.Range);
-    this.enableField('Filter.EndRangeCode',   changeValue.value == FilterType.Range);
+    this.enableField('FilterSpecialtyCode',  changeValue.value == FilterType.Specialty || changeValue.value == FilterType.Group);
+    this.enableField('FilterItensGroupCode', changeValue.value == FilterType.Group);
+    this.enableField('FilterStartRangeCode', changeValue.value == FilterType.Range);
+    this.enableField('FilterEndRangeCode',   changeValue.value == FilterType.Range);
   }
 
   getFilterDescription(filterType: FilterType) {
@@ -90,16 +90,16 @@ export class MaintenancePriceTableFilter {
   getFilterFields(options:Array<FilterType> | undefined = undefined): Array<PoDynamicFormField> {
     let filterFields: Array<PoDynamicFormField> = [];
 
-    this.addField(filterFields, options, FilterType.Specialty, 'Filter.SpecialtyCode',  'filterSpecialty',  991);
-    this.addField(filterFields, options, FilterType.Group,     'Filter.ItensGroupCode', 'filterGroup',      992);
-    this.addField(filterFields, options, FilterType.Range,     'Filter.StartRangeCode', 'filterStartRange', 993);
-    this.addField(filterFields, options, FilterType.Range,     'Filter.EndRangeCode',   'filterEndRange',   994);
+    this.addField(filterFields, options, FilterType.Specialty, 'FilterSpecialtyCode',  'filterSpecialty',  991);
+    this.addField(filterFields, options, FilterType.Group,     'FilterItensGroupCode', 'filterGroup',      992);
+    this.addField(filterFields, options, FilterType.Range,     'FilterStartRangeCode', 'filterStartRange', 993);
+    this.addField(filterFields, options, FilterType.Range,     'FilterEndRangeCode',   'filterEndRange',   994);
 
     return [
       {
         divider: this.resources['filterDivider'],
         order: 990,
-        property: 'Filter.FilterType',
+        property: 'FilterFilterType',
         label: this.resources['fields']['filterType'],
         required: true,
         gridColumns: 12,
