@@ -11,16 +11,10 @@ import { SmartUIComponentsModule } from '@smart-ui/ng-components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TCommonApiModule } from '@totvs/common-api';
 import { TotvsTokenInterceptorHttp } from './shared/interceptor/totvs-token.interceptor';
-import { FilterInterceptorHttp } from './shared/interceptor/filter.interceptor';
-
-// Mesmo que não esteja sendo utilizado, se remover dará erro no po-page-list!
-import { FaturamentoModule } from './faturamento/faturamento.module';
 import { ExportCihaModule } from './faturamento/ciha/export-ciha/export-ciha.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,14 +25,10 @@ import { ExportCihaModule } from './faturamento/ciha/export-ciha/export-ciha.mod
     PoCodeEditorModule,
     SmartUIComponentsModule,
     BrowserAnimationsModule,
-    TCommonApiModule
+    TCommonApiModule,
+    ExportCihaModule,
   ],
-  providers: [
-    TotvsTokenInterceptorHttp,
-    FilterInterceptorHttp
-  ],
-  bootstrap: [
-    AppComponent
-  ],
+  providers: [TotvsTokenInterceptorHttp],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -5,9 +5,7 @@ import { ExportCihaModule } from './ciha/export-ciha/export-ciha.module';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    TCommonApiModule
-  ],
+  imports: [CommonModule, TCommonApiModule],
+  exports: [ExportCihaModule],
 })
 export class FaturamentoModule {}

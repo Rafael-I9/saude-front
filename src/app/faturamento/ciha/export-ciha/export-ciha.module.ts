@@ -1,3 +1,4 @@
+import { ExportCIHA } from './model/export-ciha.model';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PoModule } from '@po-ui/ng-components';
@@ -7,7 +8,10 @@ import { ExportCihaComponent } from './export-ciha.component';
 import { ExportCihaRoutingModule } from './export-ciha-routing.module';
 import { ExportCihaFiltrosComponent } from './export-ciha-filtros/export-ciha-filtros.component';
 import { FormsModule } from '@angular/forms';
-import { PoPageDynamicTableModule, PoPageJobSchedulerModule } from '@po-ui/ng-templates';
+import {
+  PoPageDynamicTableModule,
+  PoPageJobSchedulerModule,
+} from '@po-ui/ng-templates';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -23,5 +27,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
   ],
   providers: [TotvsTokenInterceptorHttp],
+  exports: [ExportCihaComponent],
 })
 export class ExportCihaModule {}
