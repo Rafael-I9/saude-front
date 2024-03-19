@@ -1,3 +1,4 @@
+import { FaturamentoModule } from './faturamento/faturamento.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +12,6 @@ import { SmartUIComponentsModule } from '@smart-ui/ng-components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TCommonApiModule } from '@totvs/common-api';
 import { TotvsTokenInterceptorHttp } from './shared/interceptor/totvs-token.interceptor';
-import { ExportCihaModule } from './faturamento/ciha/export-ciha/export-ciha.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +26,7 @@ import { ExportCihaModule } from './faturamento/ciha/export-ciha/export-ciha.mod
     SmartUIComponentsModule,
     BrowserAnimationsModule,
     TCommonApiModule,
-    ExportCihaModule,
+    FaturamentoModule,
   ],
   providers: [TotvsTokenInterceptorHttp],
   bootstrap: [AppComponent],

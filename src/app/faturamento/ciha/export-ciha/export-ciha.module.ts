@@ -1,4 +1,3 @@
-import { ExportCIHA } from './model/export-ciha.model';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PoModule } from '@po-ui/ng-components';
@@ -27,6 +26,5 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
   ],
   providers: [TotvsTokenInterceptorHttp],
-  exports: [ExportCihaComponent],
 })
 export class ExportCihaModule {}
