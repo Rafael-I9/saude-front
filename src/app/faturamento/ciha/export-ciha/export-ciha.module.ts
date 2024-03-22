@@ -25,6 +25,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PoPageJobSchedulerModule,
     SharedModule,
   ],
+  exports: [ExportCihaComponent],
   providers: [TotvsTokenInterceptorHttp],
 })
 export class ExportCihaModule {}

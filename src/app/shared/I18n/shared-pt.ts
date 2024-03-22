@@ -29,9 +29,11 @@ export const sharedPt = {
     naoLiberar: 'Não Liberar',
     processos: 'Processos',
     unidadeFaturamento: 'Unidade Faturamento',
+    unidadeAtendimento: 'Unidade Atendimento',
     status: 'Status',
     competencia: 'Competência',
     pendencias: 'Pendências para rexportação do registro',
+    prestador: 'Prestador',
   },
   botoes: {
     consultar: 'Consultar',

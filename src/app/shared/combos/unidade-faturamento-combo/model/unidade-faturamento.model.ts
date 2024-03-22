@@ -1,4 +1,4 @@
-import { TipoAtendimento } from '../../enums/tipo-atendimento.enum';
+import { TipoAtendimento } from '../../../enums/tipo-atendimento.enum';
 import { ChaveUnidadeAtendimento } from './chave-unidade-faturamento.model';
 
 export class UnidadeFaturamento {

@@ -1,3 +1,4 @@
+import { TipoUnidade } from '../../../../shared/combos/unidade-faturamento-combo/model/tipo-unidade.enum';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { PoComboOption, PoNotificationService } from '@po-ui/ng-components';
 import { exportCihaPt } from '../I18n/export-ciha-pt';
@@ -14,6 +15,7 @@ export class ExportCihaFiltrosComponent {
   @Output() modeloValidoEvento = new EventEmitter<ExportCIHAParametros>();
   parametros!: ExportCIHAParametros;
   literals = exportCihaPt;
+  tipoUnidade: TipoUnidade = TipoUnidade.Faturamento;
   @Output() mudouStatusEvento = new EventEmitter<string>();
 
   public codColigada: number;

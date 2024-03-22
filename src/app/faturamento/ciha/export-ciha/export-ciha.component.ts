@@ -17,7 +17,7 @@ import {
   PoTableComponent,
 } from '@po-ui/ng-components';
 import { ExportCIHAParametrosForaCompetencia } from './model/export-ciha-parametros-fora-competencia.model';
-import { ConfigService } from 'src/app/core/config/config.service'; 
+import { ConfigService } from 'src/app/core/config/config.service';
 import { LibUtils } from 'src/app/shared/utils/lib.utils';
 
 @Component({
@@ -60,8 +60,6 @@ export class ExportCihaComponent extends ComponentBase implements OnInit {
     public override libUtils: LibUtils
   ) {
     super(config, libUtils);
-    this.serviceApi = 'export-ciha';
-    this.schemaApi = 'export-ciha/schema';
 
     this.paramsAnotherPeriod = new ExportCIHAParametrosForaCompetencia();
   }

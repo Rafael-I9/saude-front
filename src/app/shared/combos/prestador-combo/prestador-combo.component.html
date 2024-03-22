@@ -1,0 +1,11 @@
+<po-combo
+  [p-label]="labelPrestador"
+  [ngModel]="prestadorSelecionado"
+  (p-change)="alterarConvenio($event)"
+  [p-filter-service]="service"
+  [p-filter-params]="[page, pageSize]"
+  [p-debounce-time]="900"
+  [p-disabled-init-filter]="true"
+  [p-cache]="true"
+>
+</po-combo>

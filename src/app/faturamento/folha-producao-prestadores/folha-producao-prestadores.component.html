@@ -1,0 +1,146 @@
+<po-page-default [p-title]="literals.title" [p-actions]="acoesPagina">
+  <div class="po-row">
+    <po-widget
+      #poWidgetLancamento
+      class="po-sm-12 po-md-6 po-lg-5"
+      [p-title]="literals.grupo.lancamento.title"
+    >
+      <po-radio-group
+        [p-columns]="3"
+        name="tipoLancamento"
+        [p-options]="tiposLancamentos"
+        [ngModel]="parametros.tipoLancamento"
+        (ngModelChange)="alterarTipoLancamento($event)"
+      >
+      </po-radio-group>
+    </po-widget>
+
+    <po-widget
+      class="po-sm-12 po-md-6 po-lg-4"
+      [p-title]="literals.grupo.exibicaoMedico.title"
+    >
+      <po-radio-group
+        name="exibicaoMedico"
+        [p-options]="exibicaoMedico"
+        [ngModel]="parametros.exibicaoMedico"
+        (ngModelChange)="parametros.exibicaoMedico = $event"
+      ></po-radio-group>
+    </po-widget>
+
+    <po-widget
+      class="po-sm-12 po-md-6 po-lg-3"
+      [p-title]="literals.grupo.ordenacao.title"
+    >
+      <po-radio-group
+        name="ordenacao"
+        [p-options]="ordenacao"
+        [ngModel]="parametros.ordenacao"
+        (ngModelChange)="parametros.ordenacao = $event"
+      >
+      </po-radio-group>
+    </po-widget>
+
+    <po-widget
+      #widgetPeriodo
+      class="po-sm-12 po-md-6 po-xl-5"
+      [p-height]="320"
+      [p-title]="literals.grupo.periodo.title"
+    >
+      <po-datepicker-range
+        [p-label]="literals.grupo.periodo.label.execucao"
+        [ngModel]="parametros.periodoLancamento"
+        (ngModelChange)="parametros.periodoLancamento = $event"
+        class="po-sm-12 po-md-6"
+      ></po-datepicker-range>
+
+      <po-datepicker-range
+        [p-label]="literals.grupo.periodo.label.recebimento"
+        [ngModel]="parametros.periodoRecebimento"
+        (ngModelChange)="parametros.periodoRecebimento = $event"
+        [p-disabled]="somenteAReceber || todosLancamentos"
+        class="po-sm-12 po-md-6"
+      ></po-datepicker-range>
+
+      <po-datepicker-range
+        [p-label]="literals.grupo.periodo.label.previsao"
+        [p-disabled]="somenteRecebido"
+        [ngModel]="parametros.periodoPrevisao"
+        (ngModelChange)="parametros.periodoPrevisao = $event"
+        class="po-sm-12 po-md-6"
+      >
+      </po-datepicker-range>
+
+      <po-checkbox
+        class="po-sm-12 po-md-6 po-mt-5"
+        [p-label]="literals.grupo.periodo.label.somentePeriodoPrevisto"
+        [p-disabled]="somenteRecebido"
+        [ngModel]="parametros.somentePeriodoPrevisto"
+        (ngModelChange)="parametros.somentePeriodoPrevisto = $event"
+      ></po-checkbox>
+    </po-widget>
+
+    <po-widget
+      class="po-sm-12 po-md-6 po-xl-4 po-mb-2"
+      [p-title]="literals.grupo.parametrosUnidade.title"
+      [p-height]="tamanhoWidget"
+    >
+      <sau-unidade-faturamento-combo
+        [tipoUnidade]="tipoUnidade"
+        [ngModel]="parametros.unidadeAtendimento"
+        (ngModelChange)="parametros.unidadeAtendimento = $event"
+        class="po-md-12"
+      >
+      </sau-unidade-faturamento-combo>
+
+      <sau-convenio-combo
+        [ngModel]="parametros.convenio"
+        (convenioSelecionadoEvent)="alterarConvenio($event)"
+        class="po-sm-12 po-md-8"
+      >
+      </sau-convenio-combo>
+
+      <po-input
+        [p-label]="literals.grupo.parametrosUnidade.labels.remesa"
+        class="po-sm-12 po-md-4"
+        [p-disabled]="desabilitaNumeroRemessa"
+        [ngModel]="parametros.numeroRemessa"
+        (ngModelChange)="parametros.numeroRemessa = $event"
+      >
+      </po-input>
+    </po-widget>
+
+    <po-widget
+      class="po-sm-12 po-md-6 po-xl-3"
+      [p-title]="literals.grupo.prestador.title"
+      [p-height]="tamanhoWidget"
+    >
+      <sau-prestador-combo
+        name="prestadores"
+        [ngModel]="prestadorOuGrupo"
+        (prestadorSelecionadoEvent)="alterarPrestador($event)"
+        [labelPrestador]="literals.grupo.prestador.labels.grupoPrestador"
+      >
+      </sau-prestador-combo>
+
+      <sau-prestador-grupo-combo
+        name="prestadoresGrupo"
+        [labelPrestadorGrupo]="literals.grupo.prestador.labels.prestadores"
+        [codigoGrupo]="parametros.grupoPrestador"
+        [ngModel]="parametros.prestadorDoGrupo"
+        (prestadorGrupoSelecionadoEvent)="parametros.prestadorDoGrupo = $event"
+      ></sau-prestador-grupo-combo>
+      <div class="po-row">
+        <po-checkbox
+          class="po-mt-2"
+          [p-label]="
+            literals.grupo.prestador.labels.procedimentosGrupoPrestador
+          "
+          [ngModel]="parametros.incluiProcedimentosGruposPrestadores"
+          (ngModelChange)="
+            parametros.incluiProcedimentosGruposPrestadores = $event
+          "
+        ></po-checkbox>
+      </div>
+    </po-widget>
+  </div>
+</po-page-default>

@@ -2,6 +2,9 @@
     "ciha": {
         "title": "Exportação CIHA"
     },
+    "folha-producao-prestador": {
+      "title": "Folha de Produção Prestador"
+  },
     "maintenance-price-table": {
         "title": "Manutenção Tabela Preço",
         "selectOneItem": "Não há uma tabela origem selecionada, por favor selecione uma.",
