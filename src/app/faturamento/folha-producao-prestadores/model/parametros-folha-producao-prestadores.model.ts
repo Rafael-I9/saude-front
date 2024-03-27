@@ -2,19 +2,19 @@ import { TipoExibicaoMedico } from './tipo-exibicao-medico.enum';
 import { IRangerDate } from 'src/app/shared/model/ranger-date.interface';
 import { TipoLancamento } from './tipo-lancamentos.enum';
 import { TipoOrdenacao } from './tipo-ordenacao.enum';
-export class ParametrosFolhaProducaoPrestadores {
-  tipoLancamento!: TipoLancamento;
-  somentePeriodoPrevisto!: boolean;
-  periodoPrevisao!: IRangerDate;
-  periodoRecebimento!: IRangerDate;
-  periodoLancamento!: IRangerDate;
-  prestador!: number;
-  grupoPrestador!: number;
-  prestadorDoGrupo!: number;
-  incluiProcedimentosGruposPrestadores!: boolean;
-  unidadeAtendimento!: string;
-  convenio!: number;
-  numeroRemessa!: string;
-  exibicaoMedico!: TipoExibicaoMedico;
-  ordenacao!: TipoOrdenacao;
+export class ParameterSheetProductionPractitionerDto {
+  launchType!: TipoLancamento;
+  onlyForecastPeriod!: boolean;
+  forecastPeriod!: IRangerDate;
+  receiptPeriod!: IRangerDate;
+  launchPeriod!: IRangerDate;
+  practitioner!: number;
+  group!: number;
+  practitionerGroup!: number;
+  includeProcedurePractitionerGroups!: boolean;
+  unitAttendance!: number;
+  insuranceId!: number;
+  dispatchNumber!: string;
+  doctorDisplay!: TipoExibicaoMedico;
+  sorting!: TipoOrdenacao;
 }

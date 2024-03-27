@@ -9,7 +9,7 @@
         [p-columns]="3"
         name="tipoLancamento"
         [p-options]="tiposLancamentos"
-        [ngModel]="parametros.tipoLancamento"
+        [ngModel]="parametros.launchType"
         (ngModelChange)="alterarTipoLancamento($event)"
       >
       </po-radio-group>
@@ -22,8 +22,8 @@
       <po-radio-group
         name="exibicaoMedico"
         [p-options]="exibicaoMedico"
-        [ngModel]="parametros.exibicaoMedico"
-        (ngModelChange)="parametros.exibicaoMedico = $event"
+        [ngModel]="parametros.doctorDisplay"
+        (ngModelChange)="parametros.doctorDisplay = $event"
       ></po-radio-group>
     </po-widget>
 
@@ -34,8 +34,8 @@
       <po-radio-group
         name="ordenacao"
         [p-options]="ordenacao"
-        [ngModel]="parametros.ordenacao"
-        (ngModelChange)="parametros.ordenacao = $event"
+        [ngModel]="parametros.sorting"
+        (ngModelChange)="parametros.sorting = $event"
       >
       </po-radio-group>
     </po-widget>
@@ -48,15 +48,15 @@
     >
       <po-datepicker-range
         [p-label]="literals.grupo.periodo.label.execucao"
-        [ngModel]="parametros.periodoLancamento"
-        (ngModelChange)="parametros.periodoLancamento = $event"
+        [ngModel]="parametros.launchPeriod"
+        (ngModelChange)="parametros.launchPeriod = $event"
         class="po-sm-12 po-md-6"
       ></po-datepicker-range>
 
       <po-datepicker-range
         [p-label]="literals.grupo.periodo.label.recebimento"
-        [ngModel]="parametros.periodoRecebimento"
-        (ngModelChange)="parametros.periodoRecebimento = $event"
+        [ngModel]="parametros.receiptPeriod"
+        (ngModelChange)="parametros.receiptPeriod = $event"
         [p-disabled]="somenteAReceber || todosLancamentos"
         class="po-sm-12 po-md-6"
       ></po-datepicker-range>
@@ -64,8 +64,8 @@
       <po-datepicker-range
         [p-label]="literals.grupo.periodo.label.previsao"
         [p-disabled]="somenteRecebido"
-        [ngModel]="parametros.periodoPrevisao"
-        (ngModelChange)="parametros.periodoPrevisao = $event"
+        [ngModel]="parametros.forecastPeriod"
+        (ngModelChange)="parametros.forecastPeriod = $event"
         class="po-sm-12 po-md-6"
       >
       </po-datepicker-range>
@@ -74,8 +74,8 @@
         class="po-sm-12 po-md-6 po-mt-5"
         [p-label]="literals.grupo.periodo.label.somentePeriodoPrevisto"
         [p-disabled]="somenteRecebido"
-        [ngModel]="parametros.somentePeriodoPrevisto"
-        (ngModelChange)="parametros.somentePeriodoPrevisto = $event"
+        [ngModel]="parametros.onlyForecastPeriod"
+        (ngModelChange)="parametros.onlyForecastPeriod = $event"
       ></po-checkbox>
     </po-widget>
 
@@ -86,14 +86,14 @@
     >
       <sau-unidade-faturamento-combo
         [tipoUnidade]="tipoUnidade"
-        [ngModel]="parametros.unidadeAtendimento"
-        (ngModelChange)="parametros.unidadeAtendimento = $event"
+        [ngModel]="parametros.unitAttendance"
+        (mudouUnidadeEvento)="parametros.unitAttendance = $event"
         class="po-md-12"
       >
       </sau-unidade-faturamento-combo>
 
       <sau-convenio-combo
-        [ngModel]="parametros.convenio"
+        [ngModel]="parametros.insuranceId"
         (convenioSelecionadoEvent)="alterarConvenio($event)"
         class="po-sm-12 po-md-8"
       >
@@ -103,8 +103,8 @@
         [p-label]="literals.grupo.parametrosUnidade.labels.remesa"
         class="po-sm-12 po-md-4"
         [p-disabled]="desabilitaNumeroRemessa"
-        [ngModel]="parametros.numeroRemessa"
-        (ngModelChange)="parametros.numeroRemessa = $event"
+        [ngModel]="parametros.dispatchNumber"
+        (ngModelChange)="parametros.dispatchNumber = $event"
       >
       </po-input>
     </po-widget>
@@ -116,7 +116,7 @@
     >
       <sau-prestador-combo
         name="prestadores"
-        [ngModel]="prestadorOuGrupo"
+        [ngModel]="prestadorOuGrupo.practitionerId"
         (prestadorSelecionadoEvent)="alterarPrestador($event)"
         [labelPrestador]="literals.grupo.prestador.labels.grupoPrestador"
       >
@@ -125,9 +125,11 @@
       <sau-prestador-grupo-combo
         name="prestadoresGrupo"
         [labelPrestadorGrupo]="literals.grupo.prestador.labels.prestadores"
-        [codigoGrupo]="parametros.grupoPrestador"
-        [ngModel]="parametros.prestadorDoGrupo"
-        (prestadorGrupoSelecionadoEvent)="parametros.prestadorDoGrupo = $event"
+        [codigoGrupo]="prestadorOuGrupo.practitionerId"
+        [ngModel]="parametros.practitionerGroup"
+        (ngModelChange)="parametros.practitionerGroup = $event"
+        (prestadorGrupoSelecionadoEvent)="parametros.practitionerGroup = $event"
+        [desabilitado]="desabilitaPrestadoresGrupo"
       ></sau-prestador-grupo-combo>
       <div class="po-row">
         <po-checkbox
@@ -135,9 +137,9 @@
           [p-label]="
             literals.grupo.prestador.labels.procedimentosGrupoPrestador
           "
-          [ngModel]="parametros.incluiProcedimentosGruposPrestadores"
+          [ngModel]="parametros.includeProcedurePractitionerGroups"
           (ngModelChange)="
-            parametros.incluiProcedimentosGruposPrestadores = $event
+            parametros.includeProcedurePractitionerGroups = $event
           "
         ></po-checkbox>
       </div>

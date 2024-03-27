@@ -5,16 +5,16 @@ import { LibUtils } from 'src/app/shared/utils/lib.utils';
 
 @Injectable()
 export abstract class ComponentBase implements ComponentInterface {
-  constructor(
-    public config: ConfigService,
-    public libUtils: LibUtils
-  ) { }
+  constructor(public config: ConfigService, public libUtils: LibUtils) {}
 
   private _serviceApi: string = '';
   private _schemaApi: string = '';
 
   public set serviceApi(service: string) {
-    this._serviceApi = this.libUtils.concatRoute(this.config.fullApiUrl, service);
+    this._serviceApi = this.libUtils.concatRoute(
+      this.config.fullApiUrl,
+      service
+    );
   }
 
   public set schemaApi(schema: string) {

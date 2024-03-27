@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TPageResourceComponent  } from '@smart-ui/ng-components';
+import { TPageResourceComponent } from '@smart-ui/ng-components';
 import { PoBreadcrumbItem } from '@po-ui/ng-components';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../../core/config/config.service';
@@ -7,20 +7,18 @@ import { ConfigService } from '../../../core/config/config.service';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss']
+  styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
-  @ViewChild(TPageResourceComponent, { static: true }) pageResource!: TPageResourceComponent;
+  @ViewChild(TPageResourceComponent, { static: true })
+  pageResource!: TPageResourceComponent;
 
-  constructor(
-    private router: Router,
-    private configService: ConfigService
-  ) { }
+  constructor(private router: Router, private configService: ConfigService) {}
 
-  public baseUrl    : string = this.configService.fullApiUrl;
-  public serviceApi : string = '';
-  public schemaApi  : string = '';
-  public backApi    : string = '';
+  public baseUrl: string = this.configService.fullApiUrl;
+  public serviceApi: string = '';
+  public schemaApi: string = '';
+  public backApi: string = '';
 
   async ngOnInit() {
     this.pageResource.generateTableActions = () => [];
@@ -39,10 +37,9 @@ export class HistoryComponent implements OnInit {
        { label: 'Histórico', link: '' }
      ];
    */
-  public breadcrumbItems : Array<PoBreadcrumbItem> | null = null;
+  public breadcrumbItems: Array<PoBreadcrumbItem> | null = null;
 
   public onBack() {
     this.router.navigate([this.backApi]);
   }
-
 }

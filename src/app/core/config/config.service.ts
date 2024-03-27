@@ -11,7 +11,7 @@ export class ConfigService implements AppConfig {
   public userCode: string = '';
   public branchId: number = 0;
   public fiscalYear: number = 0;
-  public systemDate: Date = new Date;
+  public systemDate: Date = new Date();
   public baseUrl: string = '';
   public apiUrl: string = '';
   public fullApiUrl: string = '';
@@ -21,21 +21,25 @@ export class ConfigService implements AppConfig {
   public defaultApiModule = 'hcg';
   public defaultApiVersion = 'v1';
 
-  constructor(private context: TErpContextAcessorService, private libUtils: LibUtils) {
-    if (this.setConfigByContext())
-      return;
+  constructor(
+    private context: TErpContextAcessorService,
+    private libUtils: LibUtils
+  ) {
+    if (this.setConfigByContext()) return;
 
-    if (this.setConfigByFile())
-      return;
+    if (this.setConfigByFile()) return;
 
     this.setConfigDefault();
-  }  
+  }
 
   public getApiUrl(module: string = this.defaultApiModule) {
     return this.privateGetApiUrl(this.baseUrl, module);
   }
 
-  public getFullApiUrl(module: string = this.defaultApiModule, version: string = this.defaultApiVersion) {
+  public getFullApiUrl(
+    module: string = this.defaultApiModule,
+    version: string = this.defaultApiVersion
+  ) {
     return this.privateGetFullApiUrl(this.baseUrl, module, version);
   }
 
@@ -43,26 +47,37 @@ export class ConfigService implements AppConfig {
     return this.libUtils.concatRoute(baseUrl, 'api', module);
   }
 
-  private privateGetFullApiUrl(baseUrl: string, module: string, version: string) {
-    return this.libUtils.concatRoute(this.privateGetApiUrl(baseUrl, module), version);
+  private privateGetFullApiUrl(
+    baseUrl: string,
+    module: string,
+    version: string
+  ) {
+    return this.libUtils.concatRoute(
+      this.privateGetApiUrl(baseUrl, module),
+      version
+    );
   }
 
-  private getConfigDefault():AppConfig {
+  private getConfigDefault(): AppConfig {
     const baseUrl = this.defaultBaseUrl;
     const apiUrl = this.privateGetApiUrl(baseUrl, this.defaultApiModule);
-    const fullApiUrl = this.privateGetFullApiUrl(baseUrl, this.defaultApiModule, this.defaultApiVersion);
+    const fullApiUrl = this.privateGetFullApiUrl(
+      baseUrl,
+      this.defaultApiModule,
+      this.defaultApiVersion
+    );
 
     return {
       companyId: 1,
       userCode: '',
       branchId: 0,
       fiscalYear: 0,
-      systemDate: new Date,
+      systemDate: new Date(),
       baseUrl: baseUrl,
       apiUrl: apiUrl,
       fullApiUrl: fullApiUrl,
-      useFirstExecution: false
-    }
+      useFirstExecution: false,
+    };
   }
 
   private setConfigDefault(): void {
@@ -79,10 +94,9 @@ export class ConfigService implements AppConfig {
     this.useFirstExecution = config.useFirstExecution;
   }
 
-  private setConfigByContext(): boolean {  
+  private setConfigByContext(): boolean {
     const erpContext = this.context.ErpContext as any;
-    if (!erpContext || !erpContext.apiConfig)
-      return false;
+    if (!erpContext || !erpContext.apiConfig) return false;
 
     this.companyId = erpContext.companyId;
     this.userCode = erpContext.userCode;
@@ -98,15 +112,14 @@ export class ConfigService implements AppConfig {
   private setConfigByFile(): boolean {
     const json = this.libUtils.loadJsonFile('assets/config.json');
 
-    if (!json)
-      return false;
+    if (!json) return false;
 
     this.companyId = json.companyId;
     this.baseUrl = json.baseUrl;
     this.apiUrl = json.apiUrl;
     this.fullApiUrl = json.fullApiUrl;
     this.useFirstExecution = json.useFirstExecution;
-    
+
     this.completeWithDefaultValues();
     return true;
   }
@@ -114,15 +127,22 @@ export class ConfigService implements AppConfig {
   private completeWithDefaultValues() {
     const defaultConfig = this.getConfigDefault();
 
-    this.companyId         = this.companyId         || defaultConfig.companyId;
-    this.userCode          = this.userCode          || defaultConfig.userCode;
-    this.branchId          = this.branchId          || defaultConfig.branchId;
-    this.fiscalYear        = this.fiscalYear        || defaultConfig.fiscalYear;
-    this.systemDate        = this.systemDate        || defaultConfig.systemDate;    
-    this.baseUrl           = this.baseUrl           || defaultConfig.baseUrl;
-    this.useFirstExecution = this.useFirstExecution || defaultConfig.useFirstExecution;
-    this.apiUrl            = this.apiUrl            || this.privateGetApiUrl(this.baseUrl, this.defaultApiModule);
-    this.fullApiUrl        = this.fullApiUrl        || this.privateGetFullApiUrl(this.baseUrl, this.defaultApiModule, this.defaultApiVersion);
+    this.companyId = this.companyId || defaultConfig.companyId;
+    this.userCode = this.userCode || defaultConfig.userCode;
+    this.branchId = this.branchId || defaultConfig.branchId;
+    this.fiscalYear = this.fiscalYear || defaultConfig.fiscalYear;
+    this.systemDate = this.systemDate || defaultConfig.systemDate;
+    this.baseUrl = this.baseUrl || defaultConfig.baseUrl;
+    this.useFirstExecution =
+      this.useFirstExecution || defaultConfig.useFirstExecution;
+    this.apiUrl =
+      this.apiUrl || this.privateGetApiUrl(this.baseUrl, this.defaultApiModule);
+    this.fullApiUrl =
+      this.fullApiUrl ||
+      this.privateGetFullApiUrl(
+        this.baseUrl,
+        this.defaultApiModule,
+        this.defaultApiVersion
+      );
   }
-
 }

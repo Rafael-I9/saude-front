@@ -21,7 +21,11 @@ export class BaseHttpService {
 
   public resolveUrl(controllerName: string, params?: string | number) {
     params = params || '';
-    return this.libUtils.concatRoute(this.config.fullApiUrl, controllerName, params as string);
+    return this.libUtils.concatRoute(
+      this.config.fullApiUrl,
+      controllerName,
+      params as string
+    );
   }
 
   public get<T>(

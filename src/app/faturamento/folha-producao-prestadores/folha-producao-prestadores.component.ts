@@ -1,3 +1,5 @@
+import { ChaveComposta } from './../../shared/model/chave-composta.model';
+import { ConfigService } from 'src/app/core/config/config.service';
 import { TipoUnidade } from '../../shared/combos/unidade-faturamento-combo/model/tipo-unidade.enum';
 import { TipoExibicaoMedico } from './model/tipo-exibicao-medico.enum';
 import { TipoOrdenacao } from './model/tipo-ordenacao.enum';
@@ -10,12 +12,17 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import {
+  PoNotificationService,
   PoPageAction,
   PoRadioGroupOption,
   PoWidgetComponent,
 } from '@po-ui/ng-components';
-import { ParametrosFolhaProducaoPrestadores } from './model/parametros-folha-producao-prestadores.model';
+import { ParameterSheetProductionPractitionerDto } from './model/parametros-folha-producao-prestadores.model';
 import { IRangerDate } from 'src/app/shared/model/ranger-date.interface';
+import { PrestadorGrupoComboComponent } from 'src/app/shared/combos/prestador-grupo-combo/prestador-grupo-combo.component';
+import { PrestadorService } from 'src/app/shared/services/prestador.service';
+import { Practitioner } from 'src/app/shared/model/practitioner.model';
+import { FolhaProducaoPrestadoresService } from './folha-producao-prestadores.service';
 
 @Component({
   selector: 'sau-folha-producao-prestadores',
@@ -25,14 +32,23 @@ import { IRangerDate } from 'src/app/shared/model/ranger-date.interface';
 export class FolhaProducaoPrestadoresComponent
   implements AfterViewChecked, AfterViewInit
 {
+  constructor(
+    private prestadorServico: PrestadorService,
+    private configService: ConfigService,
+    private serviceFolhaProducao: FolhaProducaoPrestadoresService,
+    private serviceNotificacao: PoNotificationService
+  ) {}
   ngAfterViewInit(): void {
-    this.parametros.convenio = 0;
-    this.parametros.exibicaoMedico = 0;
-    this.parametros.tipoLancamento = 0;
-    this.parametros.ordenacao = 0;
+    this.parametros.insuranceId = 0;
+    this.parametros.doctorDisplay = 0;
+    this.parametros.launchType = 0;
+    this.parametros.sorting = 0;
   }
   @ViewChild('widgetPeriodo', { static: true })
   widgetPeriodo!: PoWidgetComponent;
+
+  @ViewChild(PrestadorGrupoComboComponent, { static: true })
+  prestadorGrupoComboComponent!: PrestadorGrupoComboComponent;
 
   literals = folhaProducaoPrestadoresPt;
   tipoUnidade: TipoUnidade = TipoUnidade.Atendimento;
@@ -42,42 +58,69 @@ export class FolhaProducaoPrestadoresComponent
   somenteAReceber = false;
   todosLancamentos = false;
   desabilitaNumeroRemessa = 'true';
-  prestadorOuGrupo = 0;
+  prestadorOuGrupo: Practitioner = new Practitioner();
+  desabilitaPrestadoresGrupo: boolean = true;
 
-  parametros = new ParametrosFolhaProducaoPrestadores();
+  parametros = new ParameterSheetProductionPractitionerDto();
 
   ngAfterViewChecked(): void {
     this.tamanhoWidget = this.widgetPeriodo.height;
   }
 
   alterarTipoLancamento(tipoLancamento: TipoLancamento) {
-    this.parametros.tipoLancamento = tipoLancamento;
+    this.parametros.launchType = tipoLancamento;
     this.somenteRecebido = tipoLancamento === TipoLancamento.SomenteRecebido;
     this.somenteAReceber = tipoLancamento === TipoLancamento.SomenteReceber;
     this.todosLancamentos = tipoLancamento === TipoLancamento.TodosLancamentos;
 
     if (this.somenteRecebido) {
-      this.parametros.somentePeriodoPrevisto = false;
-      this.parametros.periodoPrevisao = this.limparCampoPeriodoData();
+      this.parametros.onlyForecastPeriod = false;
+      this.parametros.forecastPeriod = this.limparCampoPeriodoData();
     }
 
     if (this.somenteAReceber || this.todosLancamentos)
-      this.parametros.periodoRecebimento = this.limparCampoPeriodoData();
+      this.parametros.receiptPeriod = this.limparCampoPeriodoData();
   }
 
   alterarConvenio(convenio: number): void {
-    this.parametros.convenio = convenio;
+    this.parametros.insuranceId = convenio;
     if (!!convenio) this.desabilitaNumeroRemessa = 'false';
     else this.desabilitaNumeroRemessa = 'true';
   }
 
   alterarPrestador(prestadorOuGrupo: number): void {
-    this.prestadorOuGrupo = prestadorOuGrupo;
-    this.parametros.prestadorDoGrupo = 0;
-    if (this.prestadorOuGrupo == 1)
-      //todo cristo Alterar para identificar se foi selecionado grupo ou prestador
-      this.parametros.prestador = prestadorOuGrupo;
-    else this.parametros.grupoPrestador = prestadorOuGrupo;
+    this.desabilitaPrestadoresGrupo = true;
+    this.parametros.practitioner = 0;
+    this.parametros.group = 0;
+    this.parametros.practitionerGroup = 0;
+    this.acoesPagina[0].disabled = true;
+
+    if (!!prestadorOuGrupo) {
+      const chavePrestador = ChaveComposta.obterChaveComposta(
+        new Map<string, any>([
+          ['CompanyId', this.configService.companyId],
+          ['PractitionerId', prestadorOuGrupo],
+        ])
+      );
+
+      this.prestadorServico.obterPrestador(chavePrestador).subscribe({
+        next: (response) => {
+          this.prestadorOuGrupo = response;
+          if (this.prestadorOuGrupo.groupId > 0) {
+            this.parametros.group = prestadorOuGrupo;
+            this.desabilitaPrestadoresGrupo = false;
+          } else {
+            this.parametros.practitioner = prestadorOuGrupo;
+            this.desabilitaPrestadoresGrupo = true;
+          }
+        },
+        complete: () => {
+          this.acoesPagina[0].disabled = false;
+        },
+      });
+    }
+
+    this.prestadorGrupoComboComponent.reset();
   }
 
   private limparCampoPeriodoData(): IRangerDate {
@@ -125,7 +168,13 @@ export class FolhaProducaoPrestadoresComponent
     {
       label: this.literals.botoes.visualizar,
       action: () => {
-        this.parametros = this.parametros;
+        this.serviceFolhaProducao
+          .gerarFolhaProducaoPrestador(this.parametros)
+          .subscribe({
+            next: () => {
+              this.serviceNotificacao.success(this.literals.mensagens.sucesso);
+            },
+          });
       },
     },
   ];

@@ -1,4 +1,4 @@
-export class Convenio {
+export class Insurance {
   companyId!: number;
   description!: string;
   initials!: string;

@@ -1,9 +1,10 @@
 <po-combo
+  #poComboPrestadoresGrupo
   [p-label]="labelPrestadorGrupo"
-  [ngModel]="prestadorGrupoSelecionado"
-  (p-change)="alterarConvenio($event)"
+  (p-change)="alterarPrestadorGrupo($event)"
   [p-filter-service]="service"
   [p-filter-params]="[page, pageSize, codigoGrupo]"
   [p-debounce-time]="900"
+  [p-disabled]="desabilitado"
 >
 </po-combo>

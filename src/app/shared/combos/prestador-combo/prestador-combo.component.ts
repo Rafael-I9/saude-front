@@ -17,11 +17,12 @@ export class PrestadorComboComponent {
   prestadorSelecionado: number = 0;
   literals = sharedPt;
   page: number = 0;
-  pageSize = 30;
+  pageSize = 50;
 
   ngOnInit(): void {}
 
-  alterarConvenio(convenio: number) {
-    this.prestadorSelecionadoEvent.emit(convenio);
+  alterarPrestador(prestador: number) {
+    this.prestadorSelecionadoEvent.emit(prestador);
+    this.prestadorSelecionado = prestador;
   }
 }

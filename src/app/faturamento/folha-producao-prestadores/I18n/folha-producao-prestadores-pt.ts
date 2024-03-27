@@ -1,7 +1,7 @@
 export const folhaProducaoPrestadoresPt = {
   title: 'Folha de Produção Prestadores',
 
-  mensagens: {},
+  mensagens: { sucesso: 'Geração realizada com sucesso' },
 
   grupo: {
     lancamento: {

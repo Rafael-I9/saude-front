@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PoComboFilter, PoComboOption } from '@po-ui/ng-components';
 import { map, Observable } from 'rxjs';
-import { BaseHttpService } from 'src/app/core/web/base.http.service';
-import { WebApiQuery } from 'src/app/core/web/webapi-query.model';
-import { Prestador } from '../../model/prestador.model';
+import { PrestadorService } from '../../services/prestador.service';
 
 const PATHURL = 'practitioners';
 
@@ -11,47 +9,44 @@ const PATHURL = 'practitioners';
   providedIn: 'root',
 })
 export class PrestadorComboService implements PoComboFilter {
-  constructor(private httpService: BaseHttpService) {}
+  constructor(private prestadorServico: PrestadorService) {}
 
   getFilteredData(
     params: any,
     filterParams?: any
   ): Observable<PoComboOption[]> {
-    const objWebApiQuery: WebApiQuery = <WebApiQuery>{
-      page: filterParams ? filterParams[0] : 1,
-      pageSize: filterParams ? filterParams[1] : 10,
-      filtersComplex: this._getOdataFilter(params),
-      pathUrl: PATHURL,
-    };
+    const filtersComplex = this._getOdataFilter(params);
 
-    return this.httpService.getAll<Prestador>(objWebApiQuery).pipe(
-      map((response) => {
-        return response.items.map(
-          (item) =>
-            <PoComboOption>{
-              value: item.practitionerId,
-              label: `${item.socialName}  ${
-                item.professionalId ? '- ' + item.professionalId : ''
-              }`,
-            }
-        );
-      })
-    );
+    return this.prestadorServico
+      .listaPrestador(filtersComplex, filterParams)
+      .pipe(
+        map((response) => {
+          const prestadoresUnificados = response.items.filter(
+            (prestador, index, self) =>
+              index ===
+              self.findIndex(
+                (p) => p.practitionerId === prestador.practitionerId
+              )
+          );
+
+          return prestadoresUnificados.map(
+            (item) =>
+              <PoComboOption>{
+                value: item.practitionerId,
+                label: `${item.socialName}  ${
+                  item.professionalId ? '- ' + item.professionalId : ''
+                }`,
+              }
+          );
+        })
+      );
   }
 
   getObjectByValue(
     value: string | number,
     filterParams?: any
   ): Observable<PoComboOption> {
-    return this.httpService.get<Array<Prestador>>(PATHURL).pipe(
-      map(
-        (prestador: Array<Prestador>) =>
-          <PoComboOption>{
-            value: prestador[0].practitionerId,
-            label: `${prestador[0].socialName} - ${prestador[0].professionalId}`,
-          }
-      )
-    );
+    throw new Error('Method not implemented.');
   }
 
   private _getOdataFilter(params: any): string {

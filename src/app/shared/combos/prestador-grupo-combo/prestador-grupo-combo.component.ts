@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { PoComboComponent } from '@po-ui/ng-components';
 import { sharedPt } from '../../I18n/shared-pt';
 import { PrestadorGrupoComboService } from './prestador-grupo-combo.service';
 
@@ -10,9 +17,13 @@ import { PrestadorGrupoComboService } from './prestador-grupo-combo.service';
 export class PrestadorGrupoComboComponent {
   constructor(public service: PrestadorGrupoComboService) {}
 
+  @ViewChild('poComboPrestadoresGrupo', { static: true })
+  poComboPrestadoresGrupo!: PoComboComponent;
+
   @Output() prestadorGrupoSelecionadoEvent = new EventEmitter<number>();
   @Input() labelPrestadorGrupo!: string;
   @Input() codigoGrupo!: number;
+  @Input() desabilitado: boolean = false;
 
   prestadorGrupoSelecionado: number = 0;
   literals = sharedPt;
@@ -21,7 +32,11 @@ export class PrestadorGrupoComboComponent {
 
   ngOnInit(): void {}
 
-  alterarConvenio(prestadorGrupo: number) {
+  alterarPrestadorGrupo(prestadorGrupo: number) {
     this.prestadorGrupoSelecionadoEvent.emit(prestadorGrupo);
+  }
+
+  reset() {
+    this.poComboPrestadoresGrupo.clear(0);
   }
 }

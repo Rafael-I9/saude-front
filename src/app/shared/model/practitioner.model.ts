@@ -1,4 +1,4 @@
-export class Prestador {
+export class Practitioner {
   practitionerId!: number;
   companyId!: number;
   socialName!: string;

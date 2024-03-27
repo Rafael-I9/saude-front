@@ -3,7 +3,7 @@ import { PoComboFilter, PoComboOption } from '@po-ui/ng-components';
 import { map, Observable } from 'rxjs';
 import { BaseHttpService } from 'src/app/core/web/base.http.service';
 import { WebApiQuery } from 'src/app/core/web/webapi-query.model';
-import { Convenio } from '../../model/convenio.model';
+import { Insurance } from '../../model/insurance.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,7 @@ export class ConvenioComboService implements PoComboFilter {
       pathUrl: 'insuranceCompanies',
     };
 
-    return this.httpService.getAll<Convenio>(objWebApiQuery).pipe(
+    return this.httpService.getAll<Insurance>(objWebApiQuery).pipe(
       map((response) => {
         return response.items.map(
           (item) =>
@@ -42,9 +42,9 @@ export class ConvenioComboService implements PoComboFilter {
     value: string | number,
     filterParams?: any
   ): Observable<PoComboOption> {
-    return this.httpService.get<Array<Convenio>>('insuranceCompanies').pipe(
+    return this.httpService.get<Array<Insurance>>('insuranceCompanies').pipe(
       map(
-        (convenio: Array<Convenio>) =>
+        (convenio: Array<Insurance>) =>
           <PoComboOption>{
             value: `${convenio[0].insuranceId}`,
             label: convenio[0].description,

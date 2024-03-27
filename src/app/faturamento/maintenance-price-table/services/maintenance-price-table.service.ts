@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { PoNotificationService, } from '@po-ui/ng-components';
+import { PoNotificationService } from '@po-ui/ng-components';
 import { ConfigService } from '../../../core/config/config.service';
 import { LibUtils } from 'src/app/shared/utils/lib.utils';
 
 export enum TableType {
   ProcServ = 'procserv',
-  MatMed = 'matmed'
+  MatMed = 'matmed',
 }
 
 export enum ProcessType {
   Copy = 'copy',
   Delete = 'delete',
-  Readjust = 'readjust'
+  Readjust = 'readjust',
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MaintenancePriceTableService {
   private resources: any;
@@ -29,14 +29,14 @@ export class MaintenancePriceTableService {
   }
 
   private getOriginTableCode(selectedRows: any): string | number {
-    const errorMessage = selectedRows == null || selectedRows.length < 1
-      ? this.resources['selectOneItem']
-      : selectedRows.length > 1
-      ? this.resources['selectOnlyOneItem']
-      : '';
-    
-    if (errorMessage != '')
-    {
+    const errorMessage =
+      selectedRows == null || selectedRows.length < 1
+        ? this.resources['selectOneItem']
+        : selectedRows.length > 1
+        ? this.resources['selectOnlyOneItem']
+        : '';
+
+    if (errorMessage != '') {
       this.poNotification.information(errorMessage);
       throw new Error(errorMessage);
     }
@@ -45,18 +45,17 @@ export class MaintenancePriceTableService {
   }
 
   private extractTableCode(value: string): string {
-    if (value.includes('|'))
-      return value.split('|')[1];
+    if (value.includes('|')) return value.split('|')[1];
 
-    return value
+    return value;
   }
 
   public getApiParams(model: any, selectedRows: any) {
     let obj = {
-      "CompanyId": this.configService.companyId,
-      "OriginTableCode": this.getOriginTableCode(selectedRows),
+      CompanyId: this.configService.companyId,
+      OriginTableCode: this.getOriginTableCode(selectedRows),
       ...model.executionParameter,
-      "Filter": this.getFilter(model),
+      Filter: this.getFilter(model),
     };
 
     obj.OriginTableCode = this.extractTableCode(obj.OriginTableCode);
@@ -73,19 +72,26 @@ export class MaintenancePriceTableService {
     let obj: any = {};
     obj.FilterType = param.FilterFilterType;
 
-    if (param.FilterSpecialtyCode)  obj.SpecialtyCode  = param.FilterSpecialtyCode;
-    if (param.FilterItensGroupCode) obj.ItensGroupCode = param.FilterItensGroupCode;
-    if (param.FilterStartRangeCode) obj.StartRangeCode = param.FilterStartRangeCode;
-    if (param.FilterEndRangeCode)   obj.EndRangeCode   = param.FilterEndRangeCode;
+    if (param.FilterSpecialtyCode)
+      obj.SpecialtyCode = param.FilterSpecialtyCode;
+    if (param.FilterItensGroupCode)
+      obj.ItensGroupCode = param.FilterItensGroupCode;
+    if (param.FilterStartRangeCode)
+      obj.StartRangeCode = param.FilterStartRangeCode;
+    if (param.FilterEndRangeCode) obj.EndRangeCode = param.FilterEndRangeCode;
 
     return obj;
   }
 
-  public getProcessEndpoint(tableType: TableType, processType: ProcessType): string {
+  public getProcessEndpoint(
+    tableType: TableType,
+    processType: ProcessType
+  ): string {
     return `${this.getBaseUrl()}maintenance-price-tables/${tableType}/${processType}`;
   }
 
-  public  getBaseUrl(): string {
+  public getBaseUrl(): string {
+    this.configService.fullApiUrl;
     return this.configService.fullApiUrl;
   }
 
@@ -96,5 +102,4 @@ export class MaintenancePriceTableService {
   public getSchemaApiUrl(service: string): string {
     return this.getServiceApiUrl(service) + '/schema';
   }
-  
 }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { PoComboFilter, PoComboOption } from '@po-ui/ng-components';
 import { map, Observable } from 'rxjs';
+import { ConfigService } from 'src/app/core/config/config.service';
 import { BaseHttpService } from 'src/app/core/web/base.http.service';
 import { WebApiQuery } from 'src/app/core/web/webapi-query.model';
-import { PrestadorGrupo } from '../../model/prestador-grupo.model';
+import { PrestadorGrupo as PractitionerGroup } from '../../model/practitioner-group.model';
 
 const PATHURL = 'group-practitioner';
 
@@ -11,7 +12,10 @@ const PATHURL = 'group-practitioner';
   providedIn: 'root',
 })
 export class PrestadorGrupoComboService implements PoComboFilter {
-  constructor(private httpService: BaseHttpService) {}
+  constructor(
+    private httpService: BaseHttpService,
+    private config: ConfigService
+  ) {}
 
   getFilteredData(
     params: any,
@@ -25,7 +29,7 @@ export class PrestadorGrupoComboService implements PoComboFilter {
       pathUrl: PATHURL,
     };
 
-    return this.httpService.getAll<PrestadorGrupo>(objWebApiQuery).pipe(
+    return this.httpService.getAll<PractitionerGroup>(objWebApiQuery).pipe(
       map((response) => {
         return response.items.map(
           (item) =>
@@ -48,6 +52,7 @@ export class PrestadorGrupoComboService implements PoComboFilter {
   getSimpleFilter(param: any): Map<string, any> {
     const filter = new Map<string, any>();
     filter.set('groupId', param);
+    filter.set('companyId', this.config.companyId);
     return filter;
   }
 
@@ -59,6 +64,6 @@ export class PrestadorGrupoComboService implements PoComboFilter {
   }
 
   private createFilterOData(value: string) {
-    return ` contains(socialName,'${value.toUpperCase()}') or contains(professionalId,'${value.toUpperCase()}')`;
+    return ` contains(socialName,'${value.toUpperCase()}') or contains(ractitionerId,'${value.toUpperCase()}')`;
   }
 }
