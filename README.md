@@ -34,9 +34,10 @@ Para obter mais ajuda sobre o Angular CLI, use `ng help` ou confira a página [V
 
 ### Para colocar seu projeto Angular no sistema RM será necessário:
 
-1. Compilar o projeto com o comando `ng build --base-href=./ --configuration production`
-2. Na pasta `Dist` será gerada uma pasta `saude-frot` com o projeto compilado, esta pasta deve ser copiada para `Pasta-da-sua-aplicação\Bin\wwwroot`
-3. Para verificar se está funcionando corretamente, basta ajustar a url da sua aplicação, alterando a porta e adicionando o nome do projeto, exemplo:
+1. Compilar o projeto com o comando `ng build --base-href=./ --configuration production`.
+2. Compilar o projeto com o comando `ng build --base-href=./ --configuration development` para conseguir debugar o projeto utilizando o RM.
+3. Na pasta `Dist` será gerada uma pasta `saude-frot` com o projeto compilado, esta pasta deve ser copiada para `Pasta-da-sua-aplicação\Bin\wwwroot`.
+4. Para verificar se está funcionando corretamente, basta ajustar a url da sua aplicação, alterando a porta e adicionando o nome do projeto, exemplo:
 \
 Utilizando `demo` como o nome do módulo, acessamos este pela url `http://localhost:4200/demo`.
 \
